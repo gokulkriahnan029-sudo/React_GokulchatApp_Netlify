@@ -1,0 +1,32 @@
+{
+  "posts": [
+    {
+      "id": "1",
+      "name": "1 st post ",
+      "message": "practice software gokul gopal yyycc ",
+      "time": "10:25  21/08/2025",
+      "number": "+91 1111111111"
+    },
+    {
+      "id": "2",
+      "name": "2 st post ",
+      "message": "practice software gokul gopal yyycc ",
+      "time": "10:25  21/08/2025",
+      "number": "+91 1111111111"
+    },
+    {
+      "id": 3,
+      "time": "14:26  21/7/2025",
+      "name": "gouklu",
+      "number": "9500146799",
+      "message": "hii i am gokul"
+    },
+    {
+      "id": 4,
+      "time": "14:26  21/7/2025",
+      "name": "",
+      "number": "",
+      "message": "well!!"
+    }
+  ]
+}
