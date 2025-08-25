@@ -1,48 +1,91 @@
 
 import './App.css'
-import Header from './Header'
-import Nav from './Nav'
-import Leftbar from './Leftbar'
-import Chatplace from './Chatplace'
-import Login from './Login'
-import Messagebox from './Messagebox'
-import { Routes, Route, Link, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import api from './api/posts'
 
 
 
 function App() { 
 
 
-    const [validname, setvalidname] = useState('')
-    const [vaalidnumber, setvalidNumber] = useState('')
+  const [messages, setMessages] = useState([]);
+  const [input, setInput] = useState("");
+
+  const systemPrompt = {
+        role: "user",
+        parts: [
+          {
+            text: "You are Gokul AI, a friendly assistant. Never mention Google or OpenAI in your replies."
+          }
+        ],
+      };
+
+  const callGemini = async (chatHistory) => {
+    try {
+      const res = await fetch(
+        "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "X-goog-api-key": "AIzaSyCW7PKHC8AFaGF6uKp3ciP87m6FRgdRFXQ"},
+          body: JSON.stringify({
+            contents: [ systemPrompt, ...chatHistory.map((msg) => ({
+              role: msg.sender === "user" ? "user" : "model",
+              parts: [{ text: msg.text }],
+            })),
+          ]
+          }),
+        }
+      );
+
+      const data = await res.json();
+      return data.candidates?.[0]?.content?.parts?.[0]?.text || "No response";
+    } catch (err) {
+      console.error("Error:", err);
+      return "Error calling Gemini API";
+    }
+  };
+
+  const handleSend = async () => {
+    if (!input.trim()) return;
+
+    const newMessages = [...messages, { sender: "user", text: input }];
+    setMessages(newMessages);
+
+    const botReply = await callGemini(newMessages);
+    setMessages([...newMessages, { sender: "bot", text: botReply }]);
+    setInput("");
+  };
 
 
-  return (
+return (
       <>
-      <Routes>
-        <Route path='/' element={<Login
-        setvalidname = {setvalidname}
-        setvalidNumber = {setvalidNumber}
-        /> }/>
-      </Routes>
-        
-      <Routes>
-        <Route path='/e' element={<div className='app'>
-        <div className='head'></div>
-          <Header title={'Gokul ChatApp'}/>
-          <Nav />
-          <div className='chatplace'>
-            <Leftbar />
-            <div className="chat-screen">
-              <Link to="/messages">View Messages</Link>
-                <Chatplace validname={validname}
-                            vaalidnumber={vaalidnumber}/>
-            </div> 
+         <div className="chat-container">
+      <div className="chat-box">
+        <header className="app-header">
+          <h1> 🤖 Gokul -- AI 🤖 </h1>
+        </header>
+        <div className="messages">
+          {messages.length < 1 && <h2 className='text'>AI Build By Gokul</h2>}
+          {messages.map((msg, i) => (
+            <div
+              key={i}
+              className={`message ${msg.sender === "user" ? "user" : "bot"}`}
+            >
+              {msg.text}
+            </div>
+          ))}
         </div>
-      </div>}/>
-      </Routes>
+
+        <div className="input-area">
+          <input
+            type="text"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder="Type your message..."
+          />
+          <button onClick={handleSend}>Send</button>
+        </div>
+      </div>
+    </div>
       </>
   )
 }

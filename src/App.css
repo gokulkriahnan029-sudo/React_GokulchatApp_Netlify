@@ -1,223 +1,126 @@
-/* HEADER */
-
-*{
-    margin: 0;
-    padding: 0;
-}
-
-.head{
-    background-color: white;
-    width: 100vw;
-    height: 30px;
-    position: sticky;
-    top: 0;
-}
-.header {
+.chat-container {
   display: flex;
-  align-items: center;   /* vertically center */
-  justify-content: space-between; /* push title left, buttons right */
-  padding: 0 1rem;       /* optional spacing */
-  position: sticky;
-  top: 20px;
-  background-color: white;
-}
-
-.headertitle {
-  margin: 0;             /* remove default h1 margin */
-  color: #0ea572;
-  font-family: "Roboto", "Helvetica Neue", Arial, sans-serif; 
-}
-
-.buttons {
-  display: flex;
-  gap: 2rem;           /* space between icons */
-}
-
-.buttons svg {
-  cursor: pointer;       /* makes icons clickable */
-  font-size: 1.5rem;     /* adjust size */
-}
-
-/* NAVBAR */
-.mainbar{
-    display: flex;
-    justify-content: center;
-}
-.navbar {
-  display: flex;
+  justify-content: center;
   align-items: center;
-  background-color: #f0f2f5;  /* light gray like WhatsApp */
-  border-radius: 20px;
-  padding: 6px 12px;
-  gap: 8px;
-  margin-top: 20px;
-  width: 800px;
+  height: 100vh;
+  background: #f3f4f6;
+  font-family: Arial, sans-serif;
 }
 
-.navbar .search-icon {
-  font-size: 16px;
-  color: #54656f; /* WhatsApp gray */
-}
-
-.navbar input {
-  border: none;
-  outline: none;
-  background: transparent;
-  flex: 1;
-  font-size: 14px;
-  color: #111;
-}
-
-.profile {
-  display: grid;
-  align-items: center;
-  gap: 10px;
-  width: 250px;
-  height: 80vh;
-  position: sticky;
-  top: 100px;
-}
-
-.profileicon{
-    display: flex;
-    align-items: center;
-    margin-left: 20px;
-}
-
-.profile-img {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%; /* makes it circular */
-  object-fit: cover;  /* keeps aspect ratio */
-}
-/* Chaatplace  */
-.chatplace{
-    display: flex;
-}
-.chat-screen {
+.chat-box {
   display: flex;
-  width: 90vw;
   flex-direction: column;
-  background: linear-gradient(180deg, #ece5dd 0%, #d9dbd5 100%);
-  overflow-y: auto;
+  width: 100%;
+  max-width: 420px;
+  height: 80vh;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+  overflow: hidden;
 }
 
-
-
-:root {
-  --gpt-bg: #ffffff;
-  --gpt-border: #e5e7eb;
-  --gpt-text: #111827;
-  --gpt-muted: #6b7280;
-  --gpt-ring: #10b98133;
-}
-
-.chatgpt-input-wrap {
-  position: fixed;
-  bottom: 0;
-  width: 83vw;
-  background: linear-gradient(180deg, transparent, #fff 40%);
-  padding: 12px 16px;
-  box-sizing: border-box;
-}
-
-.chatgpt-input {
-  display: flex;
-  align-items: flex-end;
-  gap: 8px;
-  background: var(--gpt-bg);
-  border: 1px solid var(--gpt-border);
-  border-radius: 16px;
-  padding: 10px 12px;
-  box-shadow: 0 1px 2px rgba(0,0,0,.05);
-  transition: box-shadow .15s ease, border-color .15s ease;
-}
-
-.chatgpt-input:focus-within {
-  border-color: #10b981;
-  box-shadow: 0 0 0 3px var(--gpt-ring);
-}
-
-.chatgpt-textarea {
+.messages {
   flex: 1;
-  resize: none;
-  border: 0;
-  outline: none;
-  background: transparent;
-  color: var(--gpt-text);
-  font-size: 14px;
+  padding: 16px;
+  overflow-y: auto;
+  background: white;
+}
+
+.message {
+  max-width: 75%;
+  margin-bottom: 10px;
+  padding: 10px 14px;
+  border-radius: 8px;
   line-height: 1.4;
-  max-height: 200px;
+  word-wrap: break-word;
 }
 
-.chatgpt-icon-btn {
-  background: transparent;
+.message.user {
+  background: #2563eb;
+  color: #ffffff;
+  margin-left: auto;
+  text-align: right;
+}
+
+.message.bot {
+  background: #e5e7eb;
+  color: #111827;
+  margin-right: auto;
+  text-align: left;
+}
+
+.input-area {
+  display: flex;
+  padding: 10px;
+  border-top: 1px solid #ddd;
+  background: #fff;
+}
+
+.input-area input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  margin-right: 8px;
+}
+
+.input-area button {
+  background: #2563eb;
+  color: #ffffff;
   border: none;
-  font-size: 18px;
+  padding: 10px 16px;
+  border-radius: 6px;
   cursor: pointer;
-  color: var(--gpt-muted);
-  padding: 6px;
-  border-radius: 8px;
+  font-size: 14px;
+  transition: background 0.2s;
 }
 
-.chatgpt-icon-btn:hover {
-  background: #f3f4f6;
+.input-area button:hover {
+  background: #1e40af;
+}
+.text{
+    background-color: #6697ff;
+    text-align: center;
+    margin-top: 20vh;
+    border-radius: 10px;
+    color: #4c4d4e;
+    height: 100px;
+    justify-content: center;
+    display: grid;
+    align-items: center;
+    font-style:oblique;
+
 }
 
-.chatgpt-send-btn {
-  background: #10b981;
-  border: none;
-  border-radius: 8px;
-  padding: 6px 10px;
-  cursor: pointer;
-  color: white;
-  font-size: 16px;
-  transition: background 0.2s ease;
+.chat-box>h1{
+    text-align: center;
 }
 
-.chatgpt-send-btn:hover {
-  background: #0ea572;
-}
 
-.chatgpt-hint {
-  margin-top: 6px;
+.app-header {
   text-align: center;
-  font-size: 12px;
-  color: var(--gpt-muted);
+  padding: 20px;
+  margin-bottom: 12px;
+  background: linear-gradient(270deg, #ff0080, #7928ca, #2af598, #f9d423);
+  background-size: 800% 800%;
+  color: white;
+  border: 4px solid transparent;
+  border-radius: 12px;
+  animation: gradientMove 20s ease infinite;
+  font-family: "Segoe UI", Arial, sans-serif;
 }
 
-kbd {
-  background: #f3f4f6;
-  border: 1px solid #e5e7eb;
-  border-bottom-width: 2px;
-  border-radius: 4px;
-  padding: 1px 4px;
-  font-family: monospace;
-  font-size: 11px;
+.app-header h1 {
+  margin: 0;
+  font-size: 26px;
+  font-weight: bold;
+  letter-spacing: 1px;
 }
 
-.message{
-    display: grid;
-    margin: 20px;
-}
-.message_head{
-    display: grid;
-    margin-left: 40px;
-    background-color: white;
-    border-radius: 15px;
-}
-.message_head h2>span{
-    color: #0ea572;
-}
-.message_head h2,p {
-  display: flex;              /* put name + phone in one row */
-  justify-content: space-between; /* push phone to the end */
-  align-items: center;        /* vertical alignment */
-  margin-left: 10px;
-  margin-right: 10px;
-  margin-bottom: 5px;
-}
-
-.message_head>p>span{
-    color:#6b7280
+/* 🔄 Animated background */
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
